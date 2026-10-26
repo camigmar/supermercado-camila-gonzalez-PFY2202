@@ -1,0 +1,142 @@
+/* Espacio arriba y abajo de la página */
+.contacto {
+  padding-top: 48px;
+  padding-bottom: 32px;
+}
+
+/* ----- Encabezado ----- */
+.contacto-encabezado {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.contacto-encabezado h1 {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+
+.contacto-encabezado p {
+  color: var(--texto-suave);
+}
+
+/* ----- Tarjetas ----- */
+.contacto-grilla {
+  display: grid;
+  gap: 16px;
+}
+
+.contacto-tarjeta {
+  padding: 24px;
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.contacto-tarjeta h2 {
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+}
+
+/* ----- Datos de contacto ----- */
+.contacto-datos ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.contacto-datos li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Círculo con el emoji */
+.dato-icono {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--crema);
+  font-size: 1.3rem;
+}
+
+.contacto-datos strong {
+  color: var(--verde-oscuro);
+}
+
+.contacto-datos p {
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+}
+
+/* ----- Formulario ----- */
+.formulario {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario label {
+  margin-bottom: 4px;
+  color: var(--verde-oscuro);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.formulario input,
+.formulario textarea {
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: var(--crema);
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.formulario input:focus,
+.formulario textarea:focus {
+  outline: 2px solid var(--lima);
+  border-color: var(--lima);
+}
+
+/* El botón usa la clase .boton de global.css */
+.formulario-boton {
+  align-self: flex-start;
+  border: none;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Aviso de mensaje enviado */
+.mensaje-enviado {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #e6f4d7;
+  color: var(--verde-oscuro);
+  font-weight: 600;
+}
+
+/* ----- Computador ----- */
+@media (min-width: 768px) {
+  .contacto {
+    padding-top: 72px;
+  }
+
+  .contacto-encabezado h1 {
+    font-size: 3.5rem;
+  }
+
+  /* Datos a la izquierda y formulario a la derecha */
+  .contacto-grilla {
+    grid-template-columns: 1fr 1.4fr;
+    align-items: start;
+  }
+}

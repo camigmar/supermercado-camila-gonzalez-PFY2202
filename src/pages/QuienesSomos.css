@@ -1,0 +1,108 @@
+/* Espacio arriba y abajo de la página */
+.quienes {
+  padding-top: 48px;
+  padding-bottom: 32px;
+}
+
+/* ----- Encabezado ----- */
+.quienes-encabezado {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.quienes-etiqueta {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--lima);
+  color: var(--verde-oscuro);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.quienes-encabezado h1 {
+  font-size: 2.5rem;
+}
+
+/* ----- Qué es, misión y visión ----- */
+.quienes-info {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.quienes-bloque {
+  padding: 24px;
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.quienes-bloque h2 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.quienes-bloque p {
+  color: var(--texto-suave);
+}
+
+/* ----- Valores ----- */
+.valores-titulo {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.valores {
+  display: grid;
+  gap: 16px;
+}
+
+.valor {
+  padding: 24px;
+  text-align: center;
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+/* Círculo lima con el emoji */
+.valor-icono {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--lima);
+  font-size: 2rem;
+}
+
+.valor h3 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.valor p {
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+}
+
+/* ----- Computador ----- */
+@media (min-width: 768px) {
+  .quienes {
+    padding-top: 72px;
+  }
+
+  .quienes-encabezado h1 {
+    font-size: 3.5rem;
+  }
+
+  .quienes-info,
+  .valores {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
