@@ -1,35 +1,19 @@
 import { NavLink } from 'react-router-dom'
-
-// Estilo mínimo para dejar el menú fijo abajo
-const estiloMenu = {
-  position: 'fixed',
-  bottom: 0,
-  left: 0,
-  right: 0,
-  display: 'flex',
-  justifyContent: 'space-around',
-  padding: '10px',
-  background: 'white',
-  borderTop: '1px solid #ccc',
-}
-
-// Marca en negrita la opción activa
-function estiloEnlace({ isActive }) {
-  return { fontWeight: isActive ? 'bold' : 'normal' }
-}
+import './MenuInferior.css'
 
 // Menú inferior con los enlaces a las páginas
+// NavLink agrega la clase "active" a la opción actual
 function MenuInferior() {
   return (
-    <nav style={estiloMenu}>
+    <nav className="menu-inferior">
       {/* end hace que Inicio solo quede activo en "/" */}
-      <NavLink to="/" end style={estiloEnlace}>
+      <NavLink to="/" end className="menu-enlace">
         Inicio
       </NavLink>
-      <NavLink to="/quienes-somos" style={estiloEnlace}>
+      <NavLink to="/quienes-somos" className="menu-enlace">
         Quiénes somos
       </NavLink>
-      <NavLink to="/contactanos" style={estiloEnlace}>
+      <NavLink to="/contactanos" className="menu-enlace">
         Contáctanos
       </NavLink>
     </nav>
