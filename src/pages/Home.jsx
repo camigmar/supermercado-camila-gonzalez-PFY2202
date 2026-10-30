@@ -1,6 +1,6 @@
 import './Home.css'
-import { productos } from '../data/productos'
 import { categorias } from '../data/categorias'
+import { useArticulos } from '../context/useArticulos'
 import { contarProductos } from '../utils/contarProductos'
 import Hero from '../components/Hero.jsx'
 import CategoryCard from '../components/CategoryCard.jsx'
@@ -8,6 +8,9 @@ import InventoryTable from '../components/InventoryTable.jsx'
 
 // Página de inicio que junta las secciones
 function Home() {
+  // Los productos vienen del estado global
+  const { articulos } = useArticulos()
+
   return (
     <div className="home">
       <Hero />
@@ -21,7 +24,7 @@ function Home() {
               <CategoryCard
                 key={cat.nombre}
                 categoria={cat}
-                cantidad={contarProductos(productos, cat.nombre)}
+                cantidad={contarProductos(articulos, cat.nombre)}
               />
             ))}
           </div>
@@ -32,7 +35,7 @@ function Home() {
       <section className="seccion" id="inventario">
         <div className="contenedor">
           <h2 className="seccion-titulo">Inventario</h2>
-          <InventoryTable productos={productos} />
+          <InventoryTable productos={articulos} />
         </div>
       </section>
     </div>

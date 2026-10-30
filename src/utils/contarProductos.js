@@ -1,4 +1,4 @@
-// Cuenta cuántos productos hay en una categoría
+// Cuenta cuántos productos hay en una categoría (según su tipo)
 export function contarProductos(productos, categoria) {
-  return productos.filter((p) => p.categoria === categoria).length
+  return productos.filter((p) => p.tipo === categoria).length
 }

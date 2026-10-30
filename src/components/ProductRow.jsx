@@ -5,7 +5,7 @@ function ProductRow({ producto }) {
   return (
     <li className="inventario-fila">
       <span className="producto-nombre">{producto.nombre}</span>
-      <span className="producto-categoria">{producto.categoria}</span>
+      <span className="producto-categoria">{producto.tipo}</span>
       <span className="producto-stock">
         {producto.stock} un.
         {/* Si hay menos de 10 se avisa */}
