@@ -4,6 +4,7 @@ import QuienesSomos from './pages/QuienesSomos.jsx'
 import Contactanos from './pages/Contactanos.jsx'
 import ListaArticulos from './pages/ListaArticulos.jsx'
 import AgregarArticulo from './pages/AgregarArticulo.jsx'
+import NotFound from './pages/NotFound.jsx'
 import Layout from './layouts/Layout.jsx'
 
 function App() {
@@ -16,8 +17,7 @@ function App() {
         <Route path="/contactanos" element={<Contactanos />} />
         <Route path="/articulos" element={<ListaArticulos />} />
         <Route path="/agregar-articulo" element={<AgregarArticulo />} />
-        {/* Si la ruta no existe se muestra este mensaje */}
-        <Route path="*" element={<h1>Página no encontrada</h1>} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )
