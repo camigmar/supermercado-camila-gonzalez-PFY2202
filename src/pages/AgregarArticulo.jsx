@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import CampoFormulario from '../components/CampoFormulario.jsx'
+import Boton from '../components/Boton.jsx'
+import Tarjeta from '../components/Tarjeta.jsx'
 import { categorias } from '../data/categorias'
 import { ACTIONS } from '../context/articulos'
 import { useArticulos } from '../context/useArticulos'
@@ -65,65 +67,60 @@ function AgregarArticulo() {
     <div className="mx-auto max-w-[1100px] px-4 pt-12 pb-8">
       <h1 className="mb-6 text-3xl font-bold">Agregar artículo</h1>
 
-      <form
-        noValidate
-        onSubmit={manejarEnvio}
-        className="max-w-xl rounded-[var(--radio)] bg-[var(--blanco)] p-6 shadow-[var(--sombra)]"
-      >
-        <CampoFormulario
-          etiqueta="Nombre"
-          id="nombre"
-          name="nombre"
-          type="text"
-          value={formulario.nombre}
-          onChange={manejarCambio}
-          error={errores.nombre}
-        />
+      <Tarjeta className="max-w-xl p-6">
+        <form noValidate onSubmit={manejarEnvio}>
+          <CampoFormulario
+            etiqueta="Nombre"
+            id="nombre"
+            name="nombre"
+            type="text"
+            value={formulario.nombre}
+            onChange={manejarCambio}
+            error={errores.nombre}
+          />
 
-        <CampoFormulario
-          etiqueta="Marca"
-          id="marca"
-          name="marca"
-          type="text"
-          value={formulario.marca}
-          onChange={manejarCambio}
-          error={errores.marca}
-        />
+          <CampoFormulario
+            etiqueta="Marca"
+            id="marca"
+            name="marca"
+            type="text"
+            value={formulario.marca}
+            onChange={manejarCambio}
+            error={errores.marca}
+          />
 
-        <CampoFormulario
-          etiqueta="Tipo de producto"
-          id="tipo"
-          name="tipo"
-          tipo="select"
-          value={formulario.tipo}
-          onChange={manejarCambio}
-          error={errores.tipo}
-        >
-          <option value="">Selecciona un tipo</option>
-          {categorias.map((cat) => (
-            <option key={cat.nombre} value={cat.nombre}>
-              {cat.nombre}
-            </option>
-          ))}
-        </CampoFormulario>
-
-        <button
-          type="submit"
-          className="mt-2 w-full cursor-pointer rounded-full border-0 bg-[var(--lima)] px-7 py-3 [font-family:inherit] text-base font-semibold text-[var(--verde-oscuro)] transition-colors hover:bg-[var(--lima-oscuro)] sm:w-auto"
-        >
-          Agregar artículo
-        </button>
-
-        {/* Aviso cuando se agrega bien */}
-        {exito && (
-          <p
-            role="status"
-            className="mt-4 rounded-xl bg-[#e6f4d7] px-4 py-3 font-semibold text-[var(--verde-oscuro)]"
+          <CampoFormulario
+            etiqueta="Tipo de producto"
+            id="tipo"
+            name="tipo"
+            tipo="select"
+            value={formulario.tipo}
+            onChange={manejarCambio}
+            error={errores.tipo}
           >
-            ✅ Artículo agregado correctamente
-          </p>
-        )}
-      </form>
+            <option value="">Selecciona un tipo</option>
+            {categorias.map((cat) => (
+              <option key={cat.nombre} value={cat.nombre}>
+                {cat.nombre}
+              </option>
+            ))}
+          </CampoFormulario>
+
+          <Boton type="submit" className="mt-2 w-full sm:w-auto">
+            Agregar artículo
+          </Boton>
+
+          {/* Aviso cuando se agrega bien */}
+          {exito && (
+            <p
+              role="status"
+              className="mt-4 rounded-xl bg-[#e6f4d7] px-4 py-3 font-semibold text-[var(--verde-oscuro)]"
+            >
+              ✅ Artículo agregado correctamente
+            </p>
+          )}
+        </form>
+      </Tarjeta>
     </div>
   )
 }

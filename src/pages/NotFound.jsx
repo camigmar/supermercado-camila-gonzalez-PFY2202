@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Boton from '../components/Boton.jsx'
 
 // Página que se muestra cuando la ruta no existe
 function NotFound() {
@@ -15,12 +15,7 @@ function NotFound() {
       </p>
 
       {/* Botón para volver al inicio */}
-      <Link
-        to="/"
-        className="inline-block rounded-full bg-[var(--lima)] px-7 py-3 text-base font-semibold text-[var(--verde-oscuro)] no-underline transition-colors hover:bg-[var(--lima-oscuro)]"
-      >
-        Volver al inicio
-      </Link>
+      <Boton to="/">Volver al inicio</Boton>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { useArticulos } from '../context/useArticulos'
+import Tarjeta from '../components/Tarjeta.jsx'
 
 // Página con la tabla de todos los artículos
 function ListaArticulos() {
@@ -13,7 +14,7 @@ function ListaArticulos() {
         <p className="text-[var(--texto-suave)]">No hay artículos registrados.</p>
       ) : (
         // overflow-x-auto para que la tabla se pueda mover en celular
-        <div className="overflow-x-auto rounded-[var(--radio)] bg-[var(--blanco)] shadow-[var(--sombra)]">
+        <Tarjeta className="overflow-x-auto">
           <table className="w-full border-collapse text-left">
             <thead>
               <tr className="border-b border-[#eee] text-sm text-[var(--texto-suave)]">
@@ -36,7 +37,7 @@ function ListaArticulos() {
               ))}
             </tbody>
           </table>
-        </div>
+        </Tarjeta>
       )}
     </div>
   )
