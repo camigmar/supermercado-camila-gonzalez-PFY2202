@@ -1,5 +1,6 @@
 import { useArticulos } from '../context/useArticulos'
 import Tarjeta from '../components/Tarjeta.jsx'
+import { formatearPrecio } from '../utils/formatearPrecio'
 
 // Página con la tabla de todos los artículos
 function ListaArticulos() {
@@ -21,6 +22,8 @@ function ListaArticulos() {
                 <th className="px-5 py-3 font-semibold">Nombre</th>
                 <th className="px-5 py-3 font-semibold">Marca</th>
                 <th className="px-5 py-3 font-semibold">Tipo</th>
+                <th className="px-5 py-3 text-right font-semibold">Stock</th>
+                <th className="px-5 py-3 text-right font-semibold">Precio</th>
               </tr>
             </thead>
             <tbody>
@@ -32,6 +35,10 @@ function ListaArticulos() {
                   <td className="px-5 py-3 whitespace-nowrap">{articulo.marca}</td>
                   <td className="px-5 py-3 whitespace-nowrap text-[var(--texto-suave)]">
                     {articulo.tipo}
+                  </td>
+                  <td className="px-5 py-3 text-right whitespace-nowrap">{articulo.stock} un.</td>
+                  <td className="px-5 py-3 text-right font-semibold whitespace-nowrap">
+                    {formatearPrecio(articulo.precio)}
                   </td>
                 </tr>
               ))}
