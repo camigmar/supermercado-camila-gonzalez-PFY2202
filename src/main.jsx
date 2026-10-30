@@ -2,6 +2,7 @@
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './styles/global.css'
+import './styles/tailwind.css'
 import App from './App.jsx'
 
 // BrowserRouter envuelve la app para poder usar las rutas
