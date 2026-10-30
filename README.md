@@ -1,16 +1,57 @@
-# React + Vite
+# Super Fresco 🌿
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Proyecto para el ramo PFY2202 de Duoc. Es un sitio web para un supermercado de barrio ficticio llamado **Super Fresco**, que sirve para ver y ordenar su inventario.
 
-Currently, two official plugins are available:
+## Tecnologías
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React
+- Vite
+- React Router
+- Tailwind CSS
 
-## React Compiler
+## Cómo correrlo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Necesitas tener Node.js instalado. En la carpeta del proyecto:
 
-## Expanding the Oxlint configuration
+```bash
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Después abre en el navegador la dirección que aparece en la terminal (normalmente http://localhost:5173).
+
+## Páginas
+
+- **Inicio** (`/`): presentación, categorías y tabla del inventario.
+- **Quiénes somos** (`/quienes-somos`): qué es Super Fresco, misión, visión y valores.
+- **Contáctanos** (`/contactanos`): datos de contacto y formulario con validación.
+- **Inventario de artículos** (`/articulos`): tabla con todos los artículos del estado global.
+- **Agregar artículo** (`/agregar-articulo`): formulario para agregar un artículo nuevo.
+- **Página no encontrada**: se muestra si la dirección no existe.
+
+Abajo hay un menú fijo para Inicio, Quiénes somos y Contáctanos, y arriba un menú para las dos páginas de artículos.
+
+## Estado global
+
+La lista de artículos (nombre, marca y tipo) se guarda en un estado global hecho con **Context** y **useReducer**:
+
+- `ArticulosProvider` envuelve la app en `main.jsx` y parte con los artículos de `data/articulosIniciales.js`.
+- El reducer tiene la acción `AGREGAR_ARTICULO`, que agrega el artículo al final de la lista con un id único.
+- Las páginas usan el hook `useArticulos()` para leer `articulos` o usar `dispatch`.
+
+Así, cuando se agrega un artículo en el formulario, aparece altiro en la tabla. Los datos no se guardan, se pierden al recargar la página.
+
+## Estructura de `src/`
+
+```
+src/
+├── components/   componentes reutilizables (menús, footer, botón, tarjeta, campo de formulario, etc.)
+├── context/      estado global de artículos (contexto, acciones, reducer y hook)
+├── data/         datos de ejemplo (productos, categorías, artículos, contacto, valores)
+├── layouts/      Layout con los menús y el footer que comparten las páginas
+├── pages/        una página por ruta
+├── styles/       estilos generales y Tailwind
+├── utils/        funciones de ayuda (formatear precio, contar productos)
+├── App.jsx       rutas de la app
+└── main.jsx      punto de entrada
+```
