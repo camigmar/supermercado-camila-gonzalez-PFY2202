@@ -8,13 +8,19 @@ import MenuSuperior from '../components/MenuSuperior.jsx'
 function Layout() {
   return (
     <>
-      {/* Menú de arriba */}
-      <MenuSuperior />
+      {/* Columna del alto de la pantalla (menos el espacio del menú de abajo) */}
+      <div className="flex min-h-[calc(100vh-var(--espacio-menu))] flex-col">
+        {/* Menú de arriba */}
+        <MenuSuperior />
 
-      {/* Aquí se muestra la página actual */}
-      <Outlet />
+        {/* Aquí se muestra la página actual, ocupa el espacio que sobra */}
+        <div className="flex-1">
+          <Outlet />
+        </div>
 
-      <Footer />
+        {/* El footer queda siempre abajo */}
+        <Footer />
+      </div>
 
       {/* Menú fijo abajo */}
       <MenuInferior />
