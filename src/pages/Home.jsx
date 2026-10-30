@@ -1,32 +1,8 @@
 import './Home.css'
-
-// Productos de ejemplo del inventario
-const productos = [
-  { id: 1, nombre: 'Manzana roja (kg)', categoria: 'Frutas y verduras', stock: 42, precio: 1890 },
-  { id: 2, nombre: 'Lechuga', categoria: 'Frutas y verduras', stock: 6, precio: 990 },
-  { id: 3, nombre: 'Leche entera 1 L', categoria: 'Lácteos', stock: 35, precio: 1150 },
-  { id: 4, nombre: 'Yogur natural', categoria: 'Lácteos', stock: 4, precio: 450 },
-  { id: 5, nombre: 'Arroz 1 kg', categoria: 'Abarrotes', stock: 60, precio: 1590 },
-  { id: 6, nombre: 'Agua mineral 1,5 L', categoria: 'Bebidas', stock: 9, precio: 890 },
-]
-
-// Categorías con su emoji y la clase del color de fondo
-const categorias = [
-  { nombre: 'Frutas y verduras', emoji: '🥕', clase: 'icono-frutas' },
-  { nombre: 'Lácteos', emoji: '🥛', clase: 'icono-lacteos' },
-  { nombre: 'Abarrotes', emoji: '🥫', clase: 'icono-abarrotes' },
-  { nombre: 'Bebidas', emoji: '🥤', clase: 'icono-bebidas' },
-]
-
-// Cuenta cuántos productos hay en una categoría
-function contarProductos(categoria) {
-  return productos.filter((p) => p.categoria === categoria).length
-}
-
-// Muestra el precio en pesos chilenos
-function formatearPrecio(precio) {
-  return precio.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })
-}
+import { productos } from '../data/productos'
+import { categorias } from '../data/categorias'
+import { contarProductos } from '../utils/contarProductos'
+import { formatearPrecio } from '../utils/formatearPrecio'
 
 function Home() {
   return (
@@ -61,8 +37,8 @@ function Home() {
                 <h3>{cat.nombre}</h3>
                 {/* "producto" en singular si hay solo 1 */}
                 <p>
-                  {contarProductos(cat.nombre)}{' '}
-                  {contarProductos(cat.nombre) === 1 ? 'producto' : 'productos'}
+                  {contarProductos(productos, cat.nombre)}{' '}
+                  {contarProductos(productos, cat.nombre) === 1 ? 'producto' : 'productos'}
                 </p>
               </article>
             ))}
