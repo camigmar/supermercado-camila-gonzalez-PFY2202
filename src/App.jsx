@@ -1,4 +1,4 @@
-﻿import { Routes, Route } from 'react-router-dom'
+﻿import { Routes, Route } from 'react-router'
 import Home from './pages/Home.jsx'
 import QuienesSomos from './pages/QuienesSomos.jsx'
 import Contactanos from './pages/Contactanos.jsx'

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 // Estilo lima del botón del sitio
 const clasesBoton =

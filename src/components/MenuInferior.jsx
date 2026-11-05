@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router'
 import './MenuInferior.css'
 
 // Menú inferior con los enlaces a las páginas
