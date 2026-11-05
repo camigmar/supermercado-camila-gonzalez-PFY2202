@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router'
 
 // Clases del enlace, cambian si es la página actual
 function clasesEnlace({ isActive }) {

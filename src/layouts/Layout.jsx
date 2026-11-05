@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router'
 import Footer from '../components/Footer.jsx'
 import MenuInferior from '../components/MenuInferior.jsx'
 import MenuSuperior from '../components/MenuSuperior.jsx'
