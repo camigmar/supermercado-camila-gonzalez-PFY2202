@@ -1,7 +1,6 @@
 import { Link, useParams } from 'react-router'
 import { useArticulos } from '../context/useArticulos'
-import { ACTIONS } from '../context/articulos'
-import Boton from '../components/Boton.jsx'
+import AgregarAlCarro from '../components/AgregarAlCarro.jsx'
 import Tarjeta from '../components/Tarjeta.jsx'
 import { formatearPrecio } from '../utils/formatearPrecio'
 
@@ -12,7 +11,7 @@ const clasesVolver =
 // Página con los datos de un artículo y el botón para agregarlo al carrito
 function DetalleArticulo() {
   const { id } = useParams()
-  const { articulos, carrito, dispatch } = useArticulos()
+  const { articulos, carrito } = useArticulos()
 
   // Los ids son strings, se compara igual por si acaso
   const articulo = articulos.find((a) => String(a.id) === String(id))
@@ -26,8 +25,8 @@ function DetalleArticulo() {
         <p className="mb-6 text-[var(--texto-suave)]">
           El artículo que buscas no existe o fue eliminado.
         </p>
-        <Link to="/articulos" className={clasesVolver}>
-          ← Volver al inventario
+        <Link to="/productos" className={clasesVolver}>
+          ← Volver a productos
         </Link>
       </div>
     )
@@ -35,12 +34,11 @@ function DetalleArticulo() {
 
   // Unidades de este artículo que ya están en el carrito
   const enCarrito = carrito.find((item) => item.id === articulo.id)?.cantidad ?? 0
-  const sinStock = articulo.stock === 0
 
   return (
     <div className="mx-auto max-w-xl px-4 pt-12 pb-8">
-      <Link to="/articulos" className={`${clasesVolver} mb-4`}>
-        ← Volver al inventario
+      <Link to="/productos" className={`${clasesVolver} mb-4`}>
+        ← Volver a productos
       </Link>
 
       <Tarjeta className="p-6 sm:p-8">
@@ -63,16 +61,10 @@ function DetalleArticulo() {
           </div>
         </dl>
 
-        <Boton
-          className="w-full sm:w-auto"
-          disabled={sinStock}
-          onClick={() => dispatch({ type: ACTIONS.AGREGAR_AL_CARRITO, payload: articulo.id })}
-        >
-          {sinStock ? 'Sin stock' : 'Agregar al carrito'}
-        </Boton>
+        <AgregarAlCarro articulo={articulo} />
 
         {enCarrito > 0 && (
-          <p className="mt-4 text-sm text-[var(--verde-medio)]" aria-live="polite">
+          <p className="mt-2 text-sm text-[var(--verde-medio)]" aria-live="polite">
             Tienes {enCarrito} {enCarrito === 1 ? 'unidad' : 'unidades'} en el carrito.{' '}
             <Link to="/carrito" className={clasesVolver}>
               Ir al carrito

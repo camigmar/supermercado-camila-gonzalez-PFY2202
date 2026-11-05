@@ -14,17 +14,20 @@ function cambiarStock(articulos, id, diferencia) {
   )
 }
 
-// Pasa una unidad del inventario al carrito si queda stock
-function sumarAlCarrito(state, id) {
+// Pasa "cantidad" unidades del inventario al carrito, como máximo el stock disponible
+function sumarAlCarrito(state, id, cantidad) {
   const articulo = state.articulos.find((a) => a.id === id)
-  if (!articulo || articulo.stock <= 0) return state
+  if (!articulo || articulo.stock <= 0 || !(cantidad >= 1)) return state
 
+  const unidades = Math.min(Math.floor(cantidad), articulo.stock)
   const enCarrito = state.carrito.some((item) => item.id === id)
   const carrito = enCarrito
-    ? state.carrito.map((item) => (item.id === id ? { ...item, cantidad: item.cantidad + 1 } : item))
-    : [...state.carrito, { id, cantidad: 1 }]
+    ? state.carrito.map((item) =>
+        item.id === id ? { ...item, cantidad: item.cantidad + unidades } : item,
+      )
+    : [...state.carrito, { id, cantidad: unidades }]
 
-  return { articulos: cambiarStock(state.articulos, id, -1), carrito }
+  return { articulos: cambiarStock(state.articulos, id, -unidades), carrito }
 }
 
 // Cambia el estado según la acción que llega, sin mutarlo
@@ -35,8 +38,12 @@ export function articulosReducer(state, action) {
       return { ...state, articulos: [...state.articulos, action.payload] }
 
     case ACTIONS.AGREGAR_AL_CARRITO:
+      // payload: { id, cantidad }
+      return sumarAlCarrito(state, action.payload.id, action.payload.cantidad)
+
     case ACTIONS.AUMENTAR_CANTIDAD:
-      return sumarAlCarrito(state, action.payload)
+      // payload: id, suma de a una unidad
+      return sumarAlCarrito(state, action.payload, 1)
 
     case ACTIONS.DISMINUIR_CANTIDAD: {
       const item = state.carrito.find((i) => i.id === action.payload)

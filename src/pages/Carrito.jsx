@@ -7,10 +7,7 @@ import Tarjeta from '../components/Tarjeta.jsx'
 import { formatearPrecio } from '../utils/formatearPrecio'
 import { combinarCarrito } from '../utils/combinarCarrito'
 import { calcularTotal } from '../utils/calcularTotal'
-
-// Botón redondo pequeño para la cantidad y para quitar
-const clasesBotonChico =
-  'inline-flex h-8 min-w-8 cursor-pointer items-center justify-center rounded-full border border-[var(--verde-oscuro)] bg-[var(--blanco)] px-2 text-sm font-bold text-[var(--verde-oscuro)] [font-family:inherit] transition-colors hover:bg-[var(--verde-medio)] hover:text-[var(--blanco)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--verde-oscuro)] disabled:cursor-not-allowed disabled:border-[#ccc] disabled:bg-[#f0f0f0] disabled:text-[#999] disabled:hover:bg-[#f0f0f0] disabled:hover:text-[#999]'
+import { clasesBotonChico } from '../utils/estilos'
 
 // Las columnas usan dispatch, por eso se arman con una función
 function crearColumnas(dispatch) {
@@ -20,7 +17,7 @@ function crearColumnas(dispatch) {
       alineacion: 'izquierda',
       render: (item) => (
         <Link
-          to={`/articulos/${item.id}`}
+          to={`/productos/${item.id}`}
           className="rounded font-semibold text-[var(--verde-oscuro)] underline-offset-4 hover:text-[var(--verde-medio)] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--verde-oscuro)]"
         >
           {item.nombre}
@@ -67,7 +64,7 @@ function crearColumnas(dispatch) {
       render: (item) => (
         <button
           type="button"
-          className={`${clasesBotonChico} px-3 font-semibold`}
+          className={`${clasesBotonChico} px-3!`}
           aria-label={`Quitar ${item.nombre} del carrito`}
           onClick={() => dispatch({ type: ACTIONS.QUITAR_DEL_CARRITO, payload: item.id })}
         >
@@ -97,8 +94,8 @@ function Carrito() {
       />
 
       {items.length === 0 ? (
-        <Boton to="/articulos" className="mt-4">
-          Ir al inventario
+        <Boton to="/productos" className="mt-4">
+          Ver productos
         </Boton>
       ) : (
         <Tarjeta className="mt-4 flex items-center justify-between p-5">
