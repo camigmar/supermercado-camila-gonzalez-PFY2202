@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Configuración local de herramientas
+CLAUDE.md
+.claude/
+.cursor/
+.cursorrules
+AGENTS.md
