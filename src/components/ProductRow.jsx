@@ -1,18 +1,18 @@
-import { formatearPrecio } from '../utils/formatearPrecio'
+import { claseAlineacion } from '../utils/claseAlineacion'
 
-// Una fila de la tabla con los datos de un producto
-function ProductRow({ producto }) {
+// Una fila de la tabla: una celda por cada columna
+function ProductRow({ articulo, columnas }) {
   return (
-    <li className="inventario-fila">
-      <span className="producto-nombre">{producto.nombre}</span>
-      <span className="producto-categoria">{producto.tipo}</span>
-      <span className="producto-stock">
-        {producto.stock} un.
-        {/* Si hay menos de 10 se avisa */}
-        {producto.stock < 10 && <span className="stock-bajo">Stock bajo</span>}
-      </span>
-      <span className="producto-precio">{formatearPrecio(producto.precio)}</span>
-    </li>
+    <tr className="border-b border-[#eee] last:border-b-0">
+      {columnas.map((columna) => (
+        <td
+          key={columna.titulo}
+          className={`px-5 py-3 whitespace-nowrap ${claseAlineacion(columna.alineacion)}`}
+        >
+          {columna.render(articulo)}
+        </td>
+      ))}
+    </tr>
   )
 }
 
