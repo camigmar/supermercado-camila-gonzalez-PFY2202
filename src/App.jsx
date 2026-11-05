@@ -5,6 +5,7 @@ import Contactanos from './pages/Contactanos.jsx'
 import ListaArticulos from './pages/ListaArticulos.jsx'
 import AgregarArticulo from './pages/AgregarArticulo.jsx'
 import DetalleArticulo from './pages/DetalleArticulo.jsx'
+import Carrito from './pages/Carrito.jsx'
 import NotFound from './pages/NotFound.jsx'
 import Layout from './layouts/Layout.jsx'
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/articulos" element={<ListaArticulos />} />
         <Route path="/articulos/:id" element={<DetalleArticulo />} />
         <Route path="/agregar-articulo" element={<AgregarArticulo />} />
+        <Route path="/carrito" element={<Carrito />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

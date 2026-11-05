@@ -73,7 +73,10 @@ function DetalleArticulo() {
 
         {enCarrito > 0 && (
           <p className="mt-4 text-sm text-[var(--verde-medio)]" aria-live="polite">
-            Tienes {enCarrito} {enCarrito === 1 ? 'unidad' : 'unidades'} en el carrito.
+            Tienes {enCarrito} {enCarrito === 1 ? 'unidad' : 'unidades'} en el carrito.{' '}
+            <Link to="/carrito" className={clasesVolver}>
+              Ir al carrito
+            </Link>
           </p>
         )}
       </Tarjeta>

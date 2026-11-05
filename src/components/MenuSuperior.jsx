@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router'
+import { useArticulos } from '../context/useArticulos'
 
 // Clases del enlace, cambian si es la página actual
 function clasesEnlace({ isActive }) {
@@ -11,14 +12,28 @@ function clasesEnlace({ isActive }) {
 
 // Menú de arriba para las páginas de artículos
 function MenuSuperior() {
+  const { carrito } = useArticulos()
+  // Total de unidades en el carrito
+  const unidades = carrito.reduce((total, item) => total + item.cantidad, 0)
+
   return (
     <nav className="bg-[var(--verde-oscuro)] py-3">
-      <div className="mx-auto flex max-w-[1100px] gap-2 px-4 sm:justify-end">
+      <div className="mx-auto flex max-w-[1100px] flex-wrap gap-2 px-4 sm:justify-end">
         <NavLink to="/articulos" className={clasesEnlace}>
           Inventario de artículos
         </NavLink>
         <NavLink to="/agregar-articulo" className={clasesEnlace}>
           Agregar artículo
+        </NavLink>
+        <NavLink
+          to="/carrito"
+          className={clasesEnlace}
+          aria-label={`Carrito, ${unidades} ${unidades === 1 ? 'unidad' : 'unidades'}`}
+        >
+          Carrito
+          <span className="ml-2 inline-block min-w-6 rounded-full bg-[var(--blanco)] px-2 text-xs leading-5 font-bold text-[var(--verde-oscuro)]">
+            {unidades}
+          </span>
         </NavLink>
       </div>
     </nav>
