@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
 import './Contactanos.css'
 import { datosContacto } from '../data/contacto'
 import CampoFormulario from '../components/CampoFormulario.jsx'
+import { useFormulario } from '../hooks/useFormulario'
 
 // Valores vacíos del formulario
 const formularioVacio = { nombre: '', correo: '', mensaje: '' }
@@ -26,42 +26,18 @@ function validar(formulario) {
 }
 
 function Contactanos() {
-  // Un solo estado con todos los campos
-  const [formulario, setFormulario] = useState(formularioVacio)
-  const [errores, setErrores] = useState({})
-  // Indica si ya se envió el mensaje
-  const [enviado, setEnviado] = useState(false)
-
-  // El aviso se oculta solo a los 3 segundos
-  useEffect(() => {
-    if (!enviado) return
-    const timer = setTimeout(() => setEnviado(false), 3000)
-    // Se limpia el timer si el componente se desmonta
-    return () => clearTimeout(timer)
-  }, [enviado])
-
-  // Un solo manejador, usa el name del campo
-  function manejarCambio(e) {
-    const { name, value } = e.target
-    setFormulario({ ...formulario, [name]: value })
-  }
-
-  // Al enviar no recarga la página y revisa los campos
-  function manejarEnvio(e) {
-    e.preventDefault()
-    const nuevosErrores = validar(formulario)
-    setErrores(nuevosErrores)
-
-    // Si hay errores no se envía
-    if (Object.keys(nuevosErrores).length > 0) {
-      setEnviado(false)
-      return
-    }
-
-    // Se limpian los campos (no se guarda nada)
-    setFormulario(formularioVacio)
-    setEnviado(true)
-  }
+  // El mensaje no se guarda: al enviar solo se limpian los campos
+  const {
+    valores: formulario,
+    errores,
+    exito: enviado,
+    manejarCambio,
+    manejarEnvio,
+  } = useFormulario({
+    valoresIniciales: formularioVacio,
+    validar,
+    alEnviar: () => {},
+  })
 
   return (
     <div className="contacto contenedor">
