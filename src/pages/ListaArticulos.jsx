@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router'
 import { useArticulos } from '../context/useArticulos'
 import { categorias } from '../data/categorias'
 import InventoryTable from '../components/InventoryTable.jsx'
@@ -11,7 +12,15 @@ const columnas = [
   {
     titulo: 'Nombre',
     alineacion: 'izquierda',
-    render: (a) => <span className="font-semibold text-[var(--verde-oscuro)]">{a.nombre}</span>,
+    // El nombre lleva al detalle del artículo
+    render: (a) => (
+      <Link
+        to={`/articulos/${a.id}`}
+        className="rounded font-semibold text-[var(--verde-oscuro)] underline-offset-4 hover:text-[var(--verde-medio)] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--verde-oscuro)]"
+      >
+        {a.nombre}
+      </Link>
+    ),
   },
   { titulo: 'Marca', alineacion: 'izquierda', render: (a) => a.marca },
   {
