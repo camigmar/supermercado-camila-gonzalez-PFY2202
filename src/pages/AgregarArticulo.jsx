@@ -70,6 +70,7 @@ function AgregarArticulo() {
     dispatch({
       type: ACTIONS.AGREGAR_ARTICULO,
       payload: {
+        id: crypto.randomUUID(),
         nombre: formulario.nombre.trim(),
         marca: formulario.marca.trim(),
         tipo: formulario.tipo,
