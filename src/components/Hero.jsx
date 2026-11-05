@@ -1,3 +1,5 @@
+import Boton from './Boton.jsx'
+
 // Sección principal de bienvenida
 function Hero() {
   return (
@@ -7,9 +9,10 @@ function Hero() {
           <span className="hero-etiqueta">Gestión de inventario</span>
           <h1>Super Fresco</h1>
           <p>Controla el stock de tu supermercado de forma simple y ordenada.</p>
-          <a href="#inventario" className="boton">
-            Ver inventario
-          </a>
+          {/* Botón principal para empezar a comprar */}
+          <Boton to="/productos" className="px-10! py-4! text-lg! font-bold! shadow-[var(--sombra)]">
+            Ir a comprar
+          </Boton>
         </div>
         <div className="hero-imagen" aria-hidden="true">
           🥬🍎🥖

@@ -4,6 +4,7 @@ import { useArticulos } from '../context/useArticulos'
 import { categorias } from '../data/categorias'
 import InventoryTable from '../components/InventoryTable.jsx'
 import FiltroCategorias from '../components/FiltroCategorias.jsx'
+import AgregarAlCarro from '../components/AgregarAlCarro.jsx'
 import { formatearPrecio } from '../utils/formatearPrecio'
 import { filtrarPorCategoria } from '../utils/filtrarPorCategoria'
 
@@ -15,7 +16,7 @@ const columnas = [
     // El nombre lleva al detalle del artículo
     render: (a) => (
       <Link
-        to={`/articulos/${a.id}`}
+        to={`/productos/${a.id}`}
         className="rounded font-semibold text-[var(--verde-oscuro)] underline-offset-4 hover:text-[var(--verde-medio)] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--verde-oscuro)]"
       >
         {a.nombre}
@@ -34,6 +35,7 @@ const columnas = [
     alineacion: 'derecha',
     render: (a) => <span className="font-semibold">{formatearPrecio(a.precio)}</span>,
   },
+  { titulo: 'Agregar', alineacion: 'izquierda', render: (a) => <AgregarAlCarro articulo={a} /> },
 ]
 
 // Página con la tabla de todos los artículos
@@ -50,7 +52,7 @@ function ListaArticulos() {
 
   return (
     <div className="mx-auto max-w-[1100px] px-4 pt-12 pb-8">
-      <h1 className="mb-6 text-3xl font-bold">Inventario de artículos</h1>
+      <h1 className="mb-6 text-3xl font-bold">Productos</h1>
 
       <FiltroCategorias
         categorias={categorias}
