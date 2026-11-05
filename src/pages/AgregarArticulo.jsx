@@ -1,86 +1,45 @@
-import { useEffect, useState } from 'react'
 import CampoFormulario from '../components/CampoFormulario.jsx'
 import Boton from '../components/Boton.jsx'
 import Tarjeta from '../components/Tarjeta.jsx'
 import { categorias } from '../data/categorias'
 import { ACTIONS } from '../context/articulos'
 import { useArticulos } from '../context/useArticulos'
+import { useFormulario } from '../hooks/useFormulario'
+import { validarArticulo, normalizarPrecio } from '../utils/validaciones'
 
 // Valores vacíos del formulario
 const formularioVacio = { nombre: '', marca: '', tipo: '', stock: '', precio: '' }
 
-// Revisa los campos y devuelve los errores encontrados
-function validar(formulario) {
-  const errores = {}
-  if (formulario.nombre.trim() === '') errores.nombre = 'Ingresa el nombre del artículo.'
-  if (formulario.marca.trim() === '') errores.marca = 'Ingresa la marca del artículo.'
-  if (formulario.tipo === '') errores.tipo = 'Selecciona un tipo de producto.'
-
-  // Stock: número entero desde 0
-  const stock = Number(formulario.stock)
-  if (formulario.stock.trim() === '') {
-    errores.stock = 'Ingresa el stock.'
-  } else if (!Number.isInteger(stock) || stock < 0) {
-    errores.stock = 'El stock debe ser un número entero igual o mayor a 0.'
-  }
-
-  // Precio: número entero mayor a 0
-  const precio = Number(formulario.precio)
-  if (formulario.precio.trim() === '') {
-    errores.precio = 'Ingresa el precio.'
-  } else if (!Number.isInteger(precio) || precio <= 0) {
-    errores.precio = 'El precio debe ser un número entero mayor a 0.'
-  }
-  return errores
-}
-
 // Página con el formulario para agregar artículos
 function AgregarArticulo() {
   const { dispatch } = useArticulos()
-  // Un solo estado con todos los campos
-  const [formulario, setFormulario] = useState(formularioVacio)
-  const [errores, setErrores] = useState({})
-  const [exito, setExito] = useState(false)
 
-  // El mensaje de éxito se oculta solo a los 3 segundos
-  useEffect(() => {
-    if (!exito) return
-    const timer = setTimeout(() => setExito(false), 3000)
-    // Se limpia el timer si el componente se desmonta
-    return () => clearTimeout(timer)
-  }, [exito])
-
-  // Un solo manejador, usa el name del campo
-  function manejarCambio(e) {
-    const { name, value } = e.target
-    setFormulario({ ...formulario, [name]: value })
-  }
-
-  function manejarEnvio(e) {
-    e.preventDefault()
-    const nuevosErrores = validar(formulario)
-    setErrores(nuevosErrores)
-
-    // Si hay errores no se agrega nada
-    if (Object.keys(nuevosErrores).length > 0) {
-      setExito(false)
-      return
-    }
-
+  // Lo que se hace cuando el formulario es válido
+  function agregar(valores) {
     dispatch({
       type: ACTIONS.AGREGAR_ARTICULO,
       payload: {
         id: crypto.randomUUID(),
-        nombre: formulario.nombre.trim(),
-        marca: formulario.marca.trim(),
-        tipo: formulario.tipo,
-        stock: Number(formulario.stock),
-        precio: Number(formulario.precio),
+        nombre: valores.nombre.trim(),
+        marca: valores.marca.trim(),
+        tipo: valores.tipo,
+        stock: Number(valores.stock.trim()),
+        precio: Number(normalizarPrecio(valores.precio)),
       },
     })
-    setFormulario(formularioVacio)
-    setExito(true)
   }
+
+  const {
+    valores: formulario,
+    errores,
+    exito,
+    manejarCambio,
+    manejarEnvio,
+  } = useFormulario({
+    valoresIniciales: formularioVacio,
+    validar: validarArticulo,
+    alEnviar: agregar,
+  })
 
   return (
     <div className="mx-auto max-w-[1100px] px-4 pt-12 pb-8">
@@ -129,9 +88,8 @@ function AgregarArticulo() {
             etiqueta="Stock"
             id="stock"
             name="stock"
-            type="number"
-            min="0"
-            step="1"
+            type="text"
+            inputMode="numeric"
             value={formulario.stock}
             onChange={manejarCambio}
             error={errores.stock}
@@ -141,9 +99,8 @@ function AgregarArticulo() {
             etiqueta="Precio"
             id="precio"
             name="precio"
-            type="number"
-            min="0"
-            step="1"
+            type="text"
+            inputMode="decimal"
             value={formulario.precio}
             onChange={manejarCambio}
             error={errores.precio}
