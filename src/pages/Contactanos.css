@@ -25,13 +25,6 @@
   gap: 16px;
 }
 
-.contacto-tarjeta {
-  padding: 24px;
-  background: var(--blanco);
-  border-radius: var(--radio);
-  box-shadow: var(--sombra);
-}
-
 .contacto-tarjeta h2 {
   font-size: 1.3rem;
   margin-bottom: 16px;
@@ -78,15 +71,6 @@
 .formulario {
   display: flex;
   flex-direction: column;
-}
-
-/* El botón usa la clase .boton de global.css */
-.formulario-boton {
-  align-self: flex-start;
-  border: none;
-  font-size: 1rem;
-  font-family: inherit;
-  cursor: pointer;
 }
 
 /* Aviso de mensaje enviado */

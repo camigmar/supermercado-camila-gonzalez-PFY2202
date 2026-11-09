@@ -1,6 +1,8 @@
 import './Contactanos.css'
 import { datosContacto } from '../data/contacto'
 import CampoFormulario from '../components/CampoFormulario.jsx'
+import Boton from '../components/Boton.jsx'
+import Tarjeta from '../components/Tarjeta.jsx'
 import { useFormulario } from '../hooks/useFormulario'
 
 // Valores vacíos del formulario
@@ -49,7 +51,7 @@ function Contactanos() {
 
       <div className="contacto-grilla">
         {/* Tarjeta con los datos de contacto */}
-        <section className="contacto-tarjeta contacto-datos">
+        <Tarjeta como="section" className="contacto-tarjeta contacto-datos p-6">
           <h2>Datos de contacto</h2>
           <ul>
             {datosContacto.map((dato) => (
@@ -62,10 +64,10 @@ function Contactanos() {
               </li>
             ))}
           </ul>
-        </section>
+        </Tarjeta>
 
         {/* Formulario */}
-        <section className="contacto-tarjeta">
+        <Tarjeta como="section" className="contacto-tarjeta p-6">
           <h2>Envíanos un mensaje</h2>
           <form className="formulario" noValidate onSubmit={manejarEnvio}>
             <CampoFormulario
@@ -99,14 +101,14 @@ function Contactanos() {
               error={errores.mensaje}
             />
 
-            <button type="submit" className="boton formulario-boton">
+            <Boton type="submit" className="self-start">
               Enviar
-            </button>
+            </Boton>
           </form>
 
           {/* Aviso cuando se envía */}
           {enviado && <p className="mensaje-enviado">✅ Mensaje enviado</p>}
-        </section>
+        </Tarjeta>
       </div>
     </div>
   )

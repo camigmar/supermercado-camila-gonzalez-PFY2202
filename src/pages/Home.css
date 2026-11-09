@@ -55,13 +55,6 @@
   margin-bottom: 24px;
 }
 
-/* Tarjeta blanca con sombra suave */
-.tarjeta {
-  background: var(--blanco);
-  border-radius: var(--radio);
-  box-shadow: var(--sombra);
-}
-
 /* ----- Categorías ----- */
 .categorias {
   display: grid;

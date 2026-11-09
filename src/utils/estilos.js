@@ -1,3 +1,0 @@
-// Botón redondo pequeño (cantidades y quitar), con estilo de deshabilitado
-export const clasesBotonChico =
-  'inline-flex h-8 min-w-8 cursor-pointer items-center justify-center rounded-full border border-[var(--verde-oscuro)] bg-[var(--blanco)] px-2 text-sm font-bold text-[var(--verde-oscuro)] [font-family:inherit] transition-colors hover:bg-[var(--verde-medio)] hover:text-[var(--blanco)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--verde-oscuro)] disabled:cursor-not-allowed disabled:border-[#ccc] disabled:bg-[#f0f0f0] disabled:text-[#999] disabled:hover:bg-[#f0f0f0] disabled:hover:text-[#999]'

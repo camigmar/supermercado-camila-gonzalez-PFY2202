@@ -1,7 +1,9 @@
+import Tarjeta from './Tarjeta.jsx'
+
 // Tarjeta de una categoría con su cantidad de productos
 function CategoryCard({ categoria, cantidad }) {
   return (
-    <article className="tarjeta categoria">
+    <Tarjeta como="article" className="categoria">
       <div className={`categoria-icono ${categoria.clase}`}>
         {categoria.emoji}
       </div>
@@ -10,7 +12,7 @@ function CategoryCard({ categoria, cantidad }) {
       <p>
         {cantidad} {cantidad === 1 ? 'producto' : 'productos'}
       </p>
-    </article>
+    </Tarjeta>
   )
 }
 

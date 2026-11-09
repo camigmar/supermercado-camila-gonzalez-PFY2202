@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useArticulos } from '../context/useArticulos'
 import { ACTIONS } from '../context/articulos'
 import Boton from './Boton.jsx'
-import { clasesBotonChico } from '../utils/estilos'
 
 // Selector de cantidad + botón para agregar un artículo al carro
 function AgregarAlCarro({ articulo }) {
@@ -34,32 +33,33 @@ function AgregarAlCarro({ articulo }) {
   return (
     <div>
       <div className="flex items-center gap-2">
-        <button
-          type="button"
-          className={clasesBotonChico}
+        <Boton
+          variante="contorno"
+          tamano="chico"
           aria-label={`Disminuir cantidad a agregar de ${articulo.nombre}`}
           disabled={sinStock || cantidadElegida <= 1}
           onClick={() => setCantidad(cantidadElegida - 1)}
         >
           −
-        </button>
+        </Boton>
         <span
           className="min-w-6 text-center font-semibold"
           aria-label={`Cantidad a agregar de ${articulo.nombre}: ${cantidadElegida}`}
         >
           {cantidadElegida}
         </span>
-        <button
-          type="button"
-          className={clasesBotonChico}
+        <Boton
+          variante="contorno"
+          tamano="chico"
           aria-label={`Aumentar cantidad a agregar de ${articulo.nombre}`}
           disabled={sinStock || cantidadElegida >= articulo.stock}
           onClick={() => setCantidad(cantidadElegida + 1)}
         >
           +
-        </button>
+        </Boton>
         <Boton
-          className="px-4! py-2! text-sm! whitespace-nowrap"
+          tamano="chico"
+          className="whitespace-nowrap"
           aria-label={
             sinStock ? `${articulo.nombre} sin stock` : `Agregar ${articulo.nombre} al carro`
           }

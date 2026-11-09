@@ -8,7 +8,6 @@ import { formatearPrecio } from '../utils/formatearPrecio'
 import { formatearNumero } from '../utils/formatearNumero'
 import { combinarCarrito } from '../utils/combinarCarrito'
 import { calcularTotal } from '../utils/calcularTotal'
-import { clasesBotonChico } from '../utils/estilos'
 
 // Las columnas usan dispatch, por eso se arman con una función
 function crearColumnas(dispatch) {
@@ -31,24 +30,24 @@ function crearColumnas(dispatch) {
       alineacion: 'izquierda',
       render: (item) => (
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            className={clasesBotonChico}
+          <Boton
+            variante="contorno"
+            tamano="chico"
             aria-label={`Disminuir cantidad de ${item.nombre}`}
             onClick={() => dispatch({ type: ACTIONS.DISMINUIR_CANTIDAD, payload: item.id })}
           >
             −
-          </button>
+          </Boton>
           <span className="min-w-6 text-center font-semibold">{formatearNumero(item.cantidad)}</span>
-          <button
-            type="button"
-            className={clasesBotonChico}
+          <Boton
+            variante="contorno"
+            tamano="chico"
             aria-label={`Aumentar cantidad de ${item.nombre}`}
             disabled={item.stock === 0}
             onClick={() => dispatch({ type: ACTIONS.AUMENTAR_CANTIDAD, payload: item.id })}
           >
             +
-          </button>
+          </Boton>
         </div>
       ),
     },
@@ -63,14 +62,14 @@ function crearColumnas(dispatch) {
       titulo: 'Quitar',
       alineacion: 'derecha',
       render: (item) => (
-        <button
-          type="button"
-          className={`${clasesBotonChico} px-3!`}
+        <Boton
+          variante="contorno"
+          tamano="chico"
           aria-label={`Quitar ${item.nombre} del carrito`}
           onClick={() => dispatch({ type: ACTIONS.QUITAR_DEL_CARRITO, payload: item.id })}
         >
           Quitar
-        </button>
+        </Boton>
       ),
     },
   ]

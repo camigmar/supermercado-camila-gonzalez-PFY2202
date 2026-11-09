@@ -10,7 +10,7 @@ function Hero() {
           <h1>Super Fresco</h1>
           <p>Controla el stock de tu supermercado de forma simple y ordenada.</p>
           {/* Botón principal para empezar a comprar */}
-          <Boton to="/productos" className="px-10! py-4! text-lg! font-bold! shadow-[var(--sombra)]">
+          <Boton to="/productos" tamano="grande">
             Ir a comprar
           </Boton>
         </div>
