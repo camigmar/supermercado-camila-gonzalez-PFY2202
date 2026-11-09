@@ -6,4 +6,6 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   // plugin de tailwind para vite
   plugins: [react(), tailwindcss()],
+  // El sitio se publica en GitHub Pages dentro de esta carpeta
+  base: '/supermercado-camila-gonzalez-PFY2202/',
 })
