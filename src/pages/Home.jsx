@@ -1,9 +1,10 @@
-import './Home.css'
 import { categorias } from '../data/categorias'
 import { useArticulos } from '../context/useArticulos'
 import { contarProductos } from '../utils/contarProductos'
 import Hero from '../components/Hero.jsx'
 import CategoryCard from '../components/CategoryCard.jsx'
+import Contenedor from '../components/Contenedor.jsx'
+import Seccion from '../components/Seccion.jsx'
 
 // Página de inicio que junta las secciones
 function Home() {
@@ -11,14 +12,13 @@ function Home() {
   const { articulos } = useArticulos()
 
   return (
-    <div className="home">
+    <div>
       <Hero />
 
       {/* Categorías */}
-      <section className="seccion">
-        <div className="contenedor">
-          <h2 className="seccion-titulo">Categorías</h2>
-          <div className="categorias">
+      <Contenedor>
+        <Seccion titulo="Categorías" className="py-8">
+          <div className="grid grid-cols-[repeat(2,1fr)] gap-4 md:grid-cols-[repeat(4,1fr)]">
             {categorias.map((cat) => (
               <CategoryCard
                 key={cat.nombre}
@@ -27,8 +27,8 @@ function Home() {
               />
             ))}
           </div>
-        </div>
-      </section>
+        </Seccion>
+      </Contenedor>
     </div>
   )
 }
