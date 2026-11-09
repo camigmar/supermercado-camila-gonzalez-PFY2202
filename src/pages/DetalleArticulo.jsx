@@ -3,6 +3,7 @@ import { useArticulos } from '../context/useArticulos'
 import AgregarAlCarro from '../components/AgregarAlCarro.jsx'
 import Tarjeta from '../components/Tarjeta.jsx'
 import { formatearPrecio } from '../utils/formatearPrecio'
+import { formatearNumero } from '../utils/formatearNumero'
 
 // Enlace de texto para volver a la lista
 const clasesVolver =
@@ -56,7 +57,7 @@ function DetalleArticulo() {
           <div>
             <dt className="text-sm text-[var(--texto-suave)]">Stock disponible</dt>
             <dd className="text-xl font-bold" aria-live="polite">
-              {articulo.stock} un.
+              {formatearNumero(articulo.stock)} un.
             </dd>
           </div>
         </dl>

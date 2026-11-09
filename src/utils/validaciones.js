@@ -38,16 +38,16 @@ export const reglas = {
     mensaje: `El stock debe ser un número entero entre 0 y ${STOCK_MAXIMO.toLocaleString('es-CL')}.`,
   },
   precio: {
-    // Entero o con hasta 2 decimales separados por punto
-    regex: /^\d+(\.\d{1,2})?$/,
+    // Pesos chilenos enteros: 1990 o con puntos de miles bien puestos (1.990, 1.250.000)
+    regex: /^(\d+|\d{1,3}(\.\d{3})+)$/,
     vacio: 'Ingresa el precio.',
-    mensaje: `El precio debe ser mayor a 0 y hasta ${PRECIO_MAXIMO.toLocaleString('es-CL')}, con hasta 2 decimales.`,
+    mensaje: `Ingresa el precio en pesos chilenos, sin decimales, mayor a 0 y hasta ${PRECIO_MAXIMO.toLocaleString('es-CL')} (ejemplos: 1990 o 1.990).`,
   },
 }
 
-// Cambia la coma decimal por punto (por ejemplo "1290,50" -> "1290.50")
+// Quita los puntos de miles y devuelve el precio como número entero ("1.250.000" -> 1250000)
 export function normalizarPrecio(texto) {
-  return texto.trim().replace(',', '.')
+  return Number(texto.trim().replaceAll('.', ''))
 }
 
 // Comprobaciones numéricas extra, además de la regex
@@ -57,15 +57,16 @@ const extras = {
     return Number.isInteger(numero) && numero >= 0 && numero <= STOCK_MAXIMO
   },
   precio: (texto) => {
-    const numero = Number(texto)
-    return numero > 0 && numero <= PRECIO_MAXIMO
+    // El máximo se revisa sobre el número, no sobre el texto
+    const numero = normalizarPrecio(texto)
+    return Number.isInteger(numero) && numero > 0 && numero <= PRECIO_MAXIMO
   },
 }
 
 // Valida un campo y devuelve el mensaje de error, o '' si está bien
 export function validarCampo(campo, valor) {
   const regla = reglas[campo]
-  const texto = campo === 'precio' ? normalizarPrecio(valor) : valor.trim()
+  const texto = valor.trim()
 
   if (texto === '') return regla.vacio
   if (!regla.regex.test(texto)) return regla.mensaje

@@ -6,6 +6,7 @@ import InventoryTable from '../components/InventoryTable.jsx'
 import FiltroCategorias from '../components/FiltroCategorias.jsx'
 import AgregarAlCarro from '../components/AgregarAlCarro.jsx'
 import { formatearPrecio } from '../utils/formatearPrecio'
+import { formatearNumero } from '../utils/formatearNumero'
 import { filtrarPorCategoria } from '../utils/filtrarPorCategoria'
 
 // Columnas que se muestran en esta página
@@ -29,7 +30,7 @@ const columnas = [
     alineacion: 'izquierda',
     render: (a) => <span className="text-[var(--texto-suave)]">{a.tipo}</span>,
   },
-  { titulo: 'Stock', alineacion: 'derecha', render: (a) => `${a.stock} un.` },
+  { titulo: 'Stock', alineacion: 'derecha', render: (a) => `${formatearNumero(a.stock)} un.` },
   {
     titulo: 'Precio',
     alineacion: 'derecha',

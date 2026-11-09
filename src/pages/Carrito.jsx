@@ -5,6 +5,7 @@ import InventoryTable from '../components/InventoryTable.jsx'
 import Boton from '../components/Boton.jsx'
 import Tarjeta from '../components/Tarjeta.jsx'
 import { formatearPrecio } from '../utils/formatearPrecio'
+import { formatearNumero } from '../utils/formatearNumero'
 import { combinarCarrito } from '../utils/combinarCarrito'
 import { calcularTotal } from '../utils/calcularTotal'
 import { clasesBotonChico } from '../utils/estilos'
@@ -38,7 +39,7 @@ function crearColumnas(dispatch) {
           >
             −
           </button>
-          <span className="min-w-6 text-center font-semibold">{item.cantidad}</span>
+          <span className="min-w-6 text-center font-semibold">{formatearNumero(item.cantidad)}</span>
           <button
             type="button"
             className={clasesBotonChico}

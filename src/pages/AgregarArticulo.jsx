@@ -24,7 +24,8 @@ function AgregarArticulo() {
         marca: valores.marca.trim(),
         tipo: valores.tipo,
         stock: Number(valores.stock.trim()),
-        precio: Number(normalizarPrecio(valores.precio)),
+        // Entero sin puntos de miles
+        precio: normalizarPrecio(valores.precio),
       },
     })
   }
@@ -100,7 +101,8 @@ function AgregarArticulo() {
             id="precio"
             name="precio"
             type="text"
-            inputMode="decimal"
+            inputMode="numeric"
+            placeholder="Ej: 1990 o 1.990"
             value={formulario.precio}
             onChange={manejarCambio}
             error={errores.precio}
