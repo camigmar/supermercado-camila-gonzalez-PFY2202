@@ -1,8 +1,8 @@
-import './Contactanos.css'
 import { datosContacto } from '../data/contacto'
 import CampoFormulario from '../components/CampoFormulario.jsx'
 import Boton from '../components/Boton.jsx'
 import Tarjeta from '../components/Tarjeta.jsx'
+import Contenedor from '../components/Contenedor.jsx'
 import { useFormulario } from '../hooks/useFormulario'
 
 // Valores vacíos del formulario
@@ -42,24 +42,28 @@ function Contactanos() {
   })
 
   return (
-    <div className="contacto contenedor">
+    <Contenedor className="pt-12 pb-8 md:pt-18">
       {/* Título de la página */}
-      <header className="contacto-encabezado">
-        <h1>Contáctanos</h1>
-        <p>Escríbenos si tienes dudas o sugerencias.</p>
+      <header className="mb-8 text-center">
+        <h1 className="mb-2 text-[2.5rem] md:text-[3.5rem]">Contáctanos</h1>
+        <p className="text-[var(--texto-suave)]">Escríbenos si tienes dudas o sugerencias.</p>
       </header>
 
-      <div className="contacto-grilla">
+      {/* En computador: datos a la izquierda y formulario a la derecha */}
+      <div className="grid gap-4 md:grid-cols-[1fr_1.4fr] md:items-start">
         {/* Tarjeta con los datos de contacto */}
-        <Tarjeta como="section" className="contacto-tarjeta contacto-datos p-6">
-          <h2>Datos de contacto</h2>
-          <ul>
+        <Tarjeta como="section" className="p-6">
+          <h2 className="mb-4 text-[1.3rem]">Datos de contacto</h2>
+          <ul className="m-0 grid list-none gap-4 p-0">
             {datosContacto.map((dato) => (
-              <li key={dato.titulo}>
-                <span className="dato-icono">{dato.emoji}</span>
+              <li key={dato.titulo} className="flex items-center gap-3">
+                {/* Círculo con el emoji */}
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--crema)] text-[1.3rem]">
+                  {dato.emoji}
+                </span>
                 <div>
-                  <strong>{dato.titulo}</strong>
-                  <p>{dato.texto}</p>
+                  <strong className="text-[var(--verde-oscuro)]">{dato.titulo}</strong>
+                  <p className="text-[0.95rem] text-[var(--texto-suave)]">{dato.texto}</p>
                 </div>
               </li>
             ))}
@@ -67,9 +71,9 @@ function Contactanos() {
         </Tarjeta>
 
         {/* Formulario */}
-        <Tarjeta como="section" className="contacto-tarjeta p-6">
-          <h2>Envíanos un mensaje</h2>
-          <form className="formulario" noValidate onSubmit={manejarEnvio}>
+        <Tarjeta como="section" className="p-6">
+          <h2 className="mb-4 text-[1.3rem]">Envíanos un mensaje</h2>
+          <form className="flex flex-col" noValidate onSubmit={manejarEnvio}>
             <CampoFormulario
               etiqueta="Nombre"
               id="nombre"
@@ -107,10 +111,14 @@ function Contactanos() {
           </form>
 
           {/* Aviso cuando se envía */}
-          {enviado && <p className="mensaje-enviado">✅ Mensaje enviado</p>}
+          {enviado && (
+            <p className="mt-4 rounded-xl bg-[#e6f4d7] px-4 py-3 font-semibold text-[var(--verde-oscuro)]">
+              ✅ Mensaje enviado
+            </p>
+          )}
         </Tarjeta>
       </div>
-    </div>
+    </Contenedor>
   )
 }
 
