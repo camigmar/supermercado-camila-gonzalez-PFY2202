@@ -58,8 +58,8 @@ Todas las rutas están en `src/App.jsx` y comparten el `Layout` (menú superior,
 | Ruta | Página | Qué hace |
 |---|---|---|
 | `/` | `Home` | Presentación con el botón **Ir a comprar** (lleva a Productos) y las categorías con cuántos productos tiene cada una. |
-| `/productos` | `ListaArticulos` | Tabla de productos con filtro por categoría y una columna para **agregar al carro** eligiendo la cantidad. El nombre de cada producto lleva a su detalle. |
-| `/productos/:id` | `DetalleArticulo` | Datos del producto (tipo, nombre, marca, precio y stock), selector de cantidad para agregar al carro y aviso de cuántas unidades ya hay en el carrito. Si el id no existe muestra "Artículo no encontrado". |
+| `/productos` | `ListaArticulos` | Tabla de productos con filtro por categoría y una columna para **agregar al carro** eligiendo la cantidad. En la columna Stock aparece el aviso "Stock bajo" si quedan menos de 10 unidades, o "Sin stock" si no queda ninguna. El nombre de cada producto lleva a su detalle. |
+| `/productos/:id` | `DetalleArticulo` | Datos del producto (tipo, nombre, marca, precio y stock, con el mismo aviso de "Stock bajo" o "Sin stock"), selector de cantidad para agregar al carro y aviso de cuántas unidades ya hay en el carrito. Si el id no existe muestra "Artículo no encontrado". |
 | `/carrito` | `Carrito` | Productos del carrito con botones − y +, subtotal, botón Quitar y total. Si está vacío muestra un mensaje y un botón para ver productos. |
 | `/agregar-articulo` | `AgregarArticulo` | Formulario con validaciones para agregar un artículo nuevo al inventario. |
 | `/quienes-somos` | `QuienesSomos` | Qué es Super Fresco, misión, visión y valores. |
@@ -154,6 +154,7 @@ Lo que solo le importa a un componente se queda como estado local:
 | `IconoCirculo` | Círculo con un emoji al centro; el color de fondo se pasa por `className`. |
 | `FiltroCategorias` | Botones de categorías más "Todas", con `aria-pressed` en cada uno. |
 | `AgregarAlCarro` | Selector de cantidad y botón para agregar al carro. Se usa en Productos y en el detalle. |
+| `AvisoStock` | Recibe el stock y muestra la pastilla "Stock bajo" (menos de 10 unidades) o "Sin stock" (0), o nada si hay suficiente. Es texto visible, no depende solo del color. Se usa en Productos y en el detalle. |
 | `CampoFormulario` | Label, control (`input`, `select` o `textarea`) y mensaje de error con `aria-invalid` y `aria-describedby`. |
 | `Hero`, `CategoryCard` | Partes de la página de inicio. |
 | `MenuSuperior`, `MenuInferior`, `Footer` | Navegación y pie de página que usa el `Layout`. |
@@ -195,7 +196,8 @@ Variables de `global.css`:
 | `--blanco` | `#ffffff` | Tarjetas y texto sobre fondo oscuro |
 | `--texto` | `#2b2b2b` | Texto normal |
 | `--texto-suave` | `#6b6b6b` | Textos secundarios |
-| `--rojo` / `--rojo-suave` | `#b3261e` / `#fde3df` | Errores y aviso de stock bajo |
+| `--rojo` | `#b3261e` | Mensajes de error de los formularios y texto del aviso de stock |
+| `--rojo-suave` | `#fde3df` | Fondo del aviso "Stock bajo" / "Sin stock" |
 | `--radio` | `16px` | Bordes redondeados de las tarjetas |
 | `--sombra` | `0 4px 16px rgba(31, 77, 43, 0.08)` | Sombra de las tarjetas |
 | `--espacio-menu` | `96px` | Espacio abajo para que el menú fijo no tape el footer |
@@ -324,16 +326,17 @@ Estos resultados salen de ejecutar las funciones reales de `validaciones.js` (`v
 |---|---|---|
 | 1 | Entrar al sitio | Se ve Inicio con el botón "Ir a comprar" y las 4 categorías. |
 | 2 | Presionar "Ir a comprar" | Se abre Productos con 6 productos y "Mostrando 6 de 6 artículos". |
-| 3 | Presionar "Lácteos" | Quedan 2 productos y dice "Mostrando 2 de 6 artículos". |
-| 4 | Presionar "Todas" y hacer clic en "Lechuga" | Se abre el detalle con stock 6 un. |
-| 5 | Subir la cantidad a 3 y presionar "Agregar al carro" | El stock baja a 3 un., aparece "Agregaste 3 al carro" y la insignia del menú muestra 3. |
-| 6 | Presionar "Ir al carrito" | Lechuga con cantidad 3, subtotal y total $2.970. |
-| 7 | Presionar + y luego − dos veces | La cantidad pasa a 4 ($3.960) y después a 2 ($1.980). |
-| 8 | Presionar "Quitar" | Aparece "Tu carrito está vacío." y la insignia vuelve a 0. |
-| 9 | Recargar el navegador en `/productos` | La página carga normal (no queda en blanco ni da error). |
-| 10 | Entrar a una ruta que no existe | Se ve "Página no encontrada" con el botón para volver al inicio. |
-| 11 | Entrar a `/productos/999` | Se ve "Artículo no encontrado" con un enlace para volver a productos. |
-| 12 | En Agregar artículo, enviar el formulario vacío | Aparece un error debajo de cada uno de los 5 campos. |
+| 3 | Revisar la columna Stock en Productos | Yogur natural (4 un.) y Agua mineral 1,5 L (9 un.) muestran "Stock bajo". Lechuga (6 un.) también lo muestra. Manzana roja, Leche entera y Arroz no tienen aviso. |
+| 4 | Presionar "Lácteos" | Quedan 2 productos y dice "Mostrando 2 de 6 artículos". |
+| 5 | Presionar "Todas" y hacer clic en "Lechuga" | Se abre el detalle con stock 6 un. y el aviso "Stock bajo". |
+| 6 | Subir la cantidad a 3 y presionar "Agregar al carro" | El stock baja a 3 un., aparece "Agregaste 3 al carro" y la insignia del menú muestra 3. |
+| 7 | Presionar "Ir al carrito" | Lechuga con cantidad 3, subtotal y total $2.970. |
+| 8 | Presionar + y luego − dos veces | La cantidad pasa a 4 ($3.960) y después a 2 ($1.980). |
+| 9 | Presionar "Quitar" | Aparece "Tu carrito está vacío." y la insignia vuelve a 0. |
+| 10 | Recargar el navegador en `/productos` | La página carga normal (no queda en blanco ni da error). |
+| 11 | Entrar a una ruta que no existe | Se ve "Página no encontrada" con el botón para volver al inicio. |
+| 12 | Entrar a `/productos/999` | Se ve "Artículo no encontrado" con un enlace para volver a productos. |
+| 13 | En Agregar artículo, enviar el formulario vacío | Aparece un error debajo de cada uno de los 5 campos. |
 
 ### Criterios visuales
 

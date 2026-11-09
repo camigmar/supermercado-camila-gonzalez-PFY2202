@@ -5,6 +5,7 @@ import { categorias } from '../data/categorias'
 import InventoryTable from '../components/InventoryTable.jsx'
 import FiltroCategorias from '../components/FiltroCategorias.jsx'
 import AgregarAlCarro from '../components/AgregarAlCarro.jsx'
+import AvisoStock from '../components/AvisoStock.jsx'
 import { formatearPrecio } from '../utils/formatearPrecio'
 import { formatearNumero } from '../utils/formatearNumero'
 import { filtrarPorCategoria } from '../utils/filtrarPorCategoria'
@@ -30,7 +31,17 @@ const columnas = [
     alineacion: 'izquierda',
     render: (a) => <span className="text-[var(--texto-suave)]">{a.tipo}</span>,
   },
-  { titulo: 'Stock', alineacion: 'derecha', render: (a) => `${formatearNumero(a.stock)} un.` },
+  {
+    titulo: 'Stock',
+    alineacion: 'derecha',
+    // Con menos de 10 unidades (o 0) se muestra un aviso con texto
+    render: (a) => (
+      <>
+        {formatearNumero(a.stock)} un.
+        <AvisoStock stock={a.stock} />
+      </>
+    ),
+  },
   {
     titulo: 'Precio',
     alineacion: 'derecha',

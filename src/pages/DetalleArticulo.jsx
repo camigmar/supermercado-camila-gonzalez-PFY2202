@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router'
 import { useArticulos } from '../context/useArticulos'
 import AgregarAlCarro from '../components/AgregarAlCarro.jsx'
+import AvisoStock from '../components/AvisoStock.jsx'
 import Tarjeta from '../components/Tarjeta.jsx'
 import { formatearPrecio } from '../utils/formatearPrecio'
 import { formatearNumero } from '../utils/formatearNumero'
@@ -58,6 +59,7 @@ function DetalleArticulo() {
             <dt className="text-sm text-[var(--texto-suave)]">Stock disponible</dt>
             <dd className="text-xl font-bold" aria-live="polite">
               {formatearNumero(articulo.stock)} un.
+              <AvisoStock stock={articulo.stock} />
             </dd>
           </div>
         </dl>
