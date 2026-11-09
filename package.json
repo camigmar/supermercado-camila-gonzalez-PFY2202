@@ -9,7 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist -m \"Publico el sitio\""
+    "deploy": "gh-pages -d dist --remove \"**/{*,.*}\" -m \"Publico el sitio\""
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
